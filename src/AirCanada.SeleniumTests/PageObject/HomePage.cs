@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AirCanada.SeleniumTests.PageObject
 {
@@ -33,21 +34,22 @@ namespace AirCanada.SeleniumTests.PageObject
         internal void SelectOrigin(string origin)
         {
             originCity.SendKeys(origin);
-            SelectFirstFligthOption();
+            SelectFirstFligthOption(origin);
 
         }
 
-        private void SelectFirstFligthOption()
+        private void SelectFirstFligthOption(String airportCode)
         {
-            driver.FindElementsByClassName("location-result-city")
-                .First()
+            Task.Delay(1000).GetAwaiter().GetResult();
+            driver.FindElementsByClassName("location-meta")
+                .Single(w => w.Text == airportCode)
                 .Click();
         }
 
         internal void SelectDestination(string destination)
         {
             destinationCity.SendKeys(destination);
-            SelectFirstFligthOption();
+            SelectFirstFligthOption(destination);
         }
 
         internal void SelectDates(DateTime checkIn, DateTime checkOut)
@@ -127,9 +129,9 @@ namespace AirCanada.SeleniumTests.PageObject
             numberOfPassengerField.Click();
 
             var addChildBtn = driver.FindElementById("btnChildCountAdd");
-            var zeroCounter = 1;
+            
 
-            for (var i = 1; i <= (numberOfChildPassenger - zeroCounter); i++)
+            for (var i = 1; i <= numberOfChildPassenger; i++)
             {
                 addChildBtn.Click();
             }
