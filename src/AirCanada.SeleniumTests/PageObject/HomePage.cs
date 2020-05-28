@@ -1,10 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.PageObjects;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AirCanada.SeleniumTests.PageObject
 {
@@ -17,7 +14,7 @@ namespace AirCanada.SeleniumTests.PageObject
         private IWebElement numberOfPassengerField;
         private ChromeDriver driver;
 
-        
+
         public HomePage(ChromeDriver driver)
         {
             language = driver.FindElementById("enCAEdition");
@@ -37,7 +34,7 @@ namespace AirCanada.SeleniumTests.PageObject
         {
             originCity.SendKeys(origin);
             SelectFirstFligthOption();
-               
+
         }
 
         private void SelectFirstFligthOption()
@@ -62,7 +59,7 @@ namespace AirCanada.SeleniumTests.PageObject
 
             var selectDatesBtn = driver.FindElementById("calendarSelectActionBtn");
             selectDatesBtn.Click();
-            
+
         }
 
         internal void Search()
@@ -74,7 +71,7 @@ namespace AirCanada.SeleniumTests.PageObject
         {
 
             var listOfDays = driver.FindElementsByClassName("table-block");
-            int zeroBasedMonth = referenceDate.Month -1;
+            int zeroBasedMonth = referenceDate.Month - 1;
             var dayElement = listOfDays
                 .Where(day => day.GetAttribute("data-date") == referenceDate.Day.ToString() && day.GetAttribute("data-month") == zeroBasedMonth.ToString())
                 .FirstOrDefault();
@@ -92,21 +89,6 @@ namespace AirCanada.SeleniumTests.PageObject
             }
         }
 
-        internal void SettingNumberOfAdultPassenger(int numberOfAdultPassengers)
-        {
-            numberOfPassengerField.Click();
-            var addAddultBtn = driver.FindElementById("btnAdultCountAdd");
-            var zeroCounter = 1;
-            
-
-            for (var i = 1; i <= (numberOfAdultPassengers - zeroCounter); i++)
-            {
-                addAddultBtn.Click();
-            }
-            var doneBtn = driver.FindElementById("flightPax_dn");
-            doneBtn.Click();
-        }
-        
         internal void CheckFlightStatus(string numberFlight)
         {
             var flightStatusField = driver.FindElementById("tab_magnet_title_5");
@@ -125,19 +107,19 @@ namespace AirCanada.SeleniumTests.PageObject
             return driver.FindElementsByClassName("status-bar")
                 .Any();
         }
-        internal void SettingNumberOfYoulfPassenger(int numberOfYoulfPassengers)
+        internal void SettingNumberOfAdultPassenger(int numberOfAdultPassengers)
         {
             numberOfPassengerField.Click();
-            var addYoulfBtn = driver.FindElementById("btnYouthCountAdd");
+            var addAddultBtn = driver.FindElementById("btnAdultCountAdd");
             var zeroCounter = 1;
 
-            for (var i = 1; i <= (numberOfYoulfPassengers - zeroCounter); i++)
+
+            for (var i = 1; i <= (numberOfAdultPassengers - zeroCounter); i++)
             {
-                addYoulfBtn.Click();
+                addAddultBtn.Click();
             }
             var doneBtn = driver.FindElementById("flightPax_dn");
             doneBtn.Click();
-
         }
 
         internal void SettingNumberOfChildPassenger(int numberOfChildPassenger)
@@ -155,34 +137,7 @@ namespace AirCanada.SeleniumTests.PageObject
             doneBtn.Click();
         }
 
-        internal void SettingNumberOfInfantOnLap(int numberOfInfantOnLap)
-        {
-            numberOfPassengerField.Click();
 
-            var addInfantOnLapBtn = driver.FindElementById("btnInfantCountAdd");
-            var zeroCounter = 1;
-
-            for (var i = 1; i <= (numberOfInfantOnLap - zeroCounter); i++)
-            {
-                addInfantOnLapBtn.Click();
-            }
-            var doneBtn = driver.FindElementById("flightPax_dn");
-            doneBtn.Click();
-        }
-        internal void SettingNumberOfInfantInSeat(int numberOfInfantInSeat)
-        {
-            numberOfPassengerField.Click();
-
-            var addInfantInSeatBtn = driver.FindElementById("btnInfantSeatCountAdd");
-            var zeroCounter = 1;
-
-            for (var i = 1; i <= (numberOfInfantInSeat - zeroCounter); i++)
-            {
-                addInfantInSeatBtn.Click();
-            }
-            var doneBtn = driver.FindElementById("flightPax_dn");
-            doneBtn.Click();
-        }
 
 
 
