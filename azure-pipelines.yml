@@ -30,7 +30,6 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: ''
     Contents: '**\bin**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
