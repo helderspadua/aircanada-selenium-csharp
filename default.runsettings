@@ -1,0 +1,6 @@
+﻿<RunSettings>
+  <RunConfiguration>
+    <!-- [x86] | x64  -->
+    <TargetPlatform>x64</TargetPlatform>
+  </RunConfiguration>
+</RunSettings>
